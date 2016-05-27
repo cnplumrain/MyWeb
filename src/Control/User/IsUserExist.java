@@ -1,4 +1,4 @@
-package Control;
+package Control.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -46,7 +46,9 @@ public class IsUserExist extends HttpServlet {
 		try {
 			int count=(int)SqlHelper.getSingle(sql);
 			if(count>0){
-				response.getWriter().write("该用户已存在！");
+				response.getWriter().write("1");
+			}else{
+				response.getWriter().write("0");
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

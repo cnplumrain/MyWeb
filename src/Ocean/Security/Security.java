@@ -12,6 +12,6 @@ public class Security {
 		return chr1+str+chr2;
 	}
 	public static String Decode(String str){
-		return str.substring(1,str.length()-2);
+		return str.substring(1,str.length()-1);
 	}
 }

@@ -1,4 +1,4 @@
-package Control;
+package Control.User;
 
 import java.io.IOException;
 import java.sql.SQLException;

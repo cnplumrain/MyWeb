@@ -24,14 +24,13 @@
         				   username:username
         			   }, 
         			   //dataType: "json",//此处要设置成json 
-        			   success: function(result){ 
-        				   if(result=="1"){
-        					   $("#msg").html("该用户已存在!");
+        			   success: function(result){
+        				   if(result=="0"){
+        					   $("#msg").html("该用户不存在!");
             				   $("#msg").css("color","red");
         				   }else{
         					   $("#msg").html("");
         				   }
-        				   
         			   }
         			   
         		 });//回调函数 

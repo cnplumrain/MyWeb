@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -28,7 +29,7 @@ public class VerificationCode extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public VerificationCode() {
-        super();
+        super();  
         // TODO Auto-generated constructor stub
     }
 
@@ -48,9 +49,9 @@ public class VerificationCode extends HttpServlet {
 	        g.setColor(new Color(102,102,102));   
 	        g.drawRect(0, 0, width-1, height-1);   
 	        g.setFont(mFont);   
-	  
+	        
 	        g.setColor(RandomCorlor.get(160,200));   
-	  
+	        
 	        //»­Ëæ»úÏß   
 	        for (int i=0;i<155;i++)   
 	        {   

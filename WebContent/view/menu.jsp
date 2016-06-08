@@ -53,7 +53,9 @@ animation-fill-mode:forwards;
 
 	$(document).ready(function(){
 		$('li').click(function(){
-			
+			//alert($("#contentFrame",window.parent.document).html());
+			//alert($(this).data('src'));
+			$("#contentFrame",window.parent.document).attr("src",$(this).data('src'));
 		});
 		
 		
@@ -63,14 +65,14 @@ animation-fill-mode:forwards;
 <body>
 	<nav id="menu">
 		<ul>
-			<li><a href="javascript:void(0)">一级</a>
+			<li data-src="three/clock.html"><a href="javascript:void(0)">首页</a>
 				<ul>
 					<li><a href="javascript:void(0)">二级</a></li>
 					<li><a href="javascript:void(0)">二级</a></li>
 				</ul>
 			</li>
 			<li><a href="javascript:void(0)">一级</a></li>
-			<li><a href="javascript:void(0)">一级</a></li>
+			<li data-src="me/resume.jsp"><a href="javascript:void(0)">关于我</a></li>
 		</ul>
 	</nav>
 </body>

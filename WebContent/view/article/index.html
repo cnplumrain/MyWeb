@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var fso, ts, s ; 
+	var ForReading = 1; 
+	alert(1);
+	fso = new ActiveXObject("Scripting.FileSystemObject"); 
+	alert(fso);
+	ts = fso.OpenTextFile("../../article/joke/富商的故事.txt", ForReading); 
+	s = ts.ReadLine(); 
+	
+	document.getElementById("aa").innerHTML=s; 
+});
+
+
+</script>
+</head>
+<body>
+	<div id="aa">1</div>
+	<a href="../../article/joke/富商的故事.txt">2</a>
+</body>
+</html>

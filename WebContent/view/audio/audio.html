@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script src="../../js/audio.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	 <div class="container" align="center">
+     	<div class="row">
+        	<div class="col-md-4">
+            	<ol id="m-list" style="float: right">
+				</ol>
+				<div class="col-md-4">
+					<div>
+                       	 正在播放: <strong id="rmusic"></strong><br/>
+                    <audio id="audio"></audio>
+                    <div class="btn-group" id="ctrl-area">
+                    <button class="btn btn-success" id="btn-play">播放</button>
+                    <button class="btn btn-success" id="btn-pre">上一首</button>
+                    <button class="btn btn-success" id="btn-next">下一首</button>
+                    <button class="btn btn-success" id="btn-pause">暂停</button>
+ 						<!-- Single button -->
+                       	<div class="btn-group">
+                        <!--
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+							播放模式 <span class="caret"></span>
+                        </button>
+                        -->
+                        <ul class="dropdown-menu" role="menu">
+                        	<li><button id="btn-mode">播放模式</button></li>
+                        	<li><button id="btn-loop">单曲循环</button></li>
+                            <li><button id="btn-order">顺序播放</button></li>
+                            <li><button id="btn-random">随机播放</button></li>
+                        </ul>
+</div></div></div></div></div></div></div>
+	
+</body>
+</html>

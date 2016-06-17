@@ -11,53 +11,32 @@
 width:200px;
 position:relative;
 }
-.start{
-	width:200px;
-	left:0px;
-	top:0px;
-}
-.animate{
-animation:myfirst 2s;
--moz-animation:myfirst 2s; /* Firefox */
--webkit-animation:myfirst 2s; /* Safari and Chrome */
--o-animation:myfirst 2s; /* Opera */
-animation-fill-mode:forwards;
+.trans{
+	-webkit-transition: height 1s ease-in-out 0s;
+	-o-transition: height 1s ease-in-out 0s;
+	transition: height 1s ease-in-out 0s;
 }
 
-@keyframes myfirst
-{
-0%	 {left:0px;top:0px}
-100% {left:-200px; top:0px;}
-}
-
-@-moz-keyframes myfirst /* Firefox */
-{
-0%	 {left:0px;top:0px}
-100% {left:-200px; top:0px;}
-}
-
-@-webkit-keyframes myfirst /* Safari and Chrome */
-{
-0%	 {left:0px;top:0px}
-100% {left:-200px; top:0px;}
-}
-
-@-o-keyframes myfirst /* Opera */
-{
-0%	 {left:0px;top:0px}
-100% {left:-200px; top:0px;}
-}
 </style>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$('li').click(function(){
+		$('li').click(function(e){
 			//alert($("#contentFrame",window.parent.document).html());
 			//alert($(this).data('src'));
 			$("#contentFrame",window.parent.document).attr("src",$(this).data('src'));
+			//alert($("#contentFrame").html());
+			//$("#contentFrame").load($(this).data('src'));
+			e.stopPropagation();    //  阻止事件冒泡
+
 		});
-		
+		$("#menu>ul>li").click(function(e){	//取第一层li
+			
+			$(this).children("ul").children("li").toggle();
+			//$(this).children("ul").children("li").attr("class","trans");
+			e.stopPropagation();    //  阻止事件冒泡
+		});
 		
 	});
 </script>
@@ -65,13 +44,14 @@ animation-fill-mode:forwards;
 <body>
 	<nav id="menu">
 		<ul>
-			<li data-src="three/clock.html"><a href="javascript:void(0)">首页</a>
+			<li data-src="three/clock.html"><a href="javascript:void(0)">首页</a></li>
+			<li data-src="three/clock.html"><a href="javascript:void(0)">文章</a>
 				<ul>
-					<li><a href="javascript:void(0)">二级</a></li>
+					<li data-src="article/index.html"><a href="javascript:void(0)">开心一刻</a></li>
 					<li><a href="javascript:void(0)">二级</a></li>
 				</ul>
 			</li>
-			<li><a href="javascript:void(0)">一级</a></li>
+			<li data-src="audio/audio.html"><a href="javascript:void(0)">音乐</a></li>
 			<li data-src="me/resume.jsp"><a href="javascript:void(0)">关于我</a></li>
 		</ul>
 	</nav>

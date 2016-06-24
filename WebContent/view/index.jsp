@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet"type="text/css" href="../css/main.css"/>
 <title>Insert title here</title>
 <style type="text/css">
 	.background{
@@ -16,9 +17,9 @@
 	
 	.trans{
 	
-		-webkit-transition: width 1s ease-in-out 0s;
-		-o-transition: width 1s ease-in-out 0s;
-		transition: width 1s ease-in-out 0s;
+		-webkit-transition: width 0.5s ease-in-out 0s;
+		-o-transition: width 0.5s ease-in-out 0s;
+		transition: width 0.5s ease-in-out 0s;
 	}
 	
 	
@@ -51,9 +52,9 @@
 </head>
 <body class="background" background="../img/sky.jpg" style="color:#ffd700 ;">
 	<div  style="white-space: nowrap;">
-	
+	<div style="float: right;">${sessionScope.displayName}</div>
 	<iframe scrolling="no" id="menuFrame" src="menu.jsp"  style="border:0;margin:0;"></iframe>
-	<iframe scrolling="no" id="contentFrame" src="three/clock.html"  style="border:0;height:1000px;margin:0;"></iframe>
+	<iframe scrolling="no" id="contentFrame" name="contentFrame" src="three/clock.html"  style="border:0;height:1000px;margin:0;"></iframe>
 	
 
 	</div>

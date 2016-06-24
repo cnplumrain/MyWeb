@@ -1,79 +1,56 @@
-package Control.User;
+package Control.Activity;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
-
-import Db.SqlHelper;
 
 /**
- * Servlet implementation class UserManage
+ * Servlet implementation class ActivityJoin
  */
-@WebServlet (name = "UserManage", urlPatterns = { "/userManage" }, 
-//loadOnStartup = 1,
-initParams = { 
-		@WebInitParam(name = "name", value = "java developer"),
-		@WebInitParam(name = "age", value = "20")
-})
-public class UserManage extends HttpServlet {
+@WebServlet("/activityJoin")
+public class ActivityJoin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	
-    public UserManage() {
+    public ActivityJoin() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public void init(ServletConfig config) throws ServletException {
-		System.out.println("Servlet  初始化"+config);
-		super.init(config);
-	}
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		// 使用 GBK 设置中文正常显示
-		//response.setCharacterEncoding("GBK");
-		//String initParams=getInitParameter("name");
-		
-		String sql = "select * from Users";
-		List<?> list = null;
+		response.setContentType("text/html;charset=utf-8");
+		int activityId=Integer.parseInt(request.getParameter("activityId"));
+		int userId=(int) request.getSession().getAttribute("userId");
+		String sql = "insert into UserActivity(UserId,ActivityId) values ('"+userId+"','"+activityId+"')";
 		try {
-			 list = Db.SqlHelper.query(sql);
+			Db.SqlHelper.insertWithReturnPrimeKey(sql);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			response.getWriter().print("<script>alert('报名失败!请联系管理员');history.go(-1);</script>");
+			return;
 		}
-		request.setAttribute("users", list);
-		request.getSession().setAttribute("o", "sessionTest");
-		request.getRequestDispatcher("/view/user/userManage.jsp").forward(request,response) ;
-		//System.out.println(list);
+		response.getWriter().print("<script>alert('报名成功!')</script>");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-    
 
 }

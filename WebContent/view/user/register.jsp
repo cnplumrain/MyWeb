@@ -42,13 +42,15 @@
       
     <body>
     	<form method="post">
-        <input type="text" name="UserName" placeholder="用户名" value="" onchange="userCheck(this);">
+        <input type="text" name="UserName" placeholder="用户名" value="" onchange="userCheck(this);">   
         <label id="msg"></label>
         <br>
-        <input type="password" name="Password" placeholder="密码" value=""><br>
+        <input type="password" name="Password" placeholder="密码" value=""><br/>
+        <input type="text" name="DisplayName" placeholder="昵称" value=""><br/>
+        <input type="text" name="RealName" placeholder="真实姓名" value=""><br/>
         <input type="text" name="VerificationCode" placeholder="验证码">
         <img  id="verification"  src="verification" onclick="changeCode();" style="vertical-align: middle;"><br>
-        <button type="submit" style="margin-top: 10px;">确定</button>
+        <button type="submit" style="margin-top: 10px;">注册</button>
         </form>
     </body>  
 </html>  

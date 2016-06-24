@@ -5,6 +5,7 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -58,10 +59,13 @@ public class Register extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
 		String username = request.getParameter("UserName");
+		String displayName = request.getParameter("DisplayName");
+		String realName = request.getParameter("RealName");
 		String password = request.getParameter("Password");
 		String verificationCode = request.getParameter("VerificationCode");
 		if (!request.getSession().getAttribute("verificationCode").toString().equalsIgnoreCase(verificationCode)) {
-			request.getRequestDispatcher("/view/user/register.jsp").forward(request, response);
+			response.getWriter().print("<script>alert('验证码错误!');history.go(-1);</script>");
+			return;
 		} else {
 			int count=0;
 			String sql = "select count(*) from Users where UserName='" + username + "'";
@@ -70,25 +74,28 @@ public class Register extends HttpServlet {
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				response.getWriter().print("<script>alert('注册失败!" + e1.getMessage() + "');history.go(-1);</script>");
+				return;
 			}
 			if (count > 0) {
 				response.getWriter().print("<script>alert('该用户已存在!');history.go(-1);</script>");
+				return;
 			} else {
 				String encodePassword = Security.Encode(password);
-				Date timeNow = new Date();
+				Calendar calendar = Calendar.getInstance();
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String timeNowString = format.format(timeNow);
-				String sql2 = "insert into Users(UserName,Password,RegistrationTime,LoginTime,Status,Type) "
-						+ "values ('" + username + "','" + encodePassword + "','" + timeNowString + "','"
-						+ timeNowString + "',0,0)";
+				String time = format.format(calendar.getTime());
+				String sql2 = "insert into Users(UserName,DisplayName,RealName,Password,RegistrationTime,LoginTime,LoginIp,Status,Type) "
+						+ "values ('" + username + "','" + displayName + "','" +realName +"','"+ encodePassword + "','" + time + "','"
+						+ time + "','" + request.getRemoteAddr()+"',0,0)";
 				try {
 					Db.SqlHelper.insertWithReturnPrimeKey(sql2);
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					response.getWriter().print("<script>alert('注册失败!" + e.getMessage() + "');history.go(-1);</script>");
+					return;
 				}
-				response.getWriter().print("<script>alert('注册成功!')</script>");
+				response.getWriter().print("<script>alert('注册成功!');location.href='login';</script>");
 			}
 
 		}

@@ -2,6 +2,8 @@ package Control.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.basic.BasicScrollPaneUI.HSBChangeListener;
 
 import Db.SqlHelper;
 import Model.User;
@@ -50,24 +53,39 @@ public class Login extends HttpServlet {
 		} else {
 			String username = request.getParameter("UserName");
 			String password = request.getParameter("Password");
-		
+			
 			List<HashMap> list=null;
 			String sql = "select * from Users where UserName='" + username + "'";
 			try {
 				list =  SqlHelper.query(sql);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
-				response.getWriter().print("<script>alert('注册失败!" + e1.getMessage() + "');history.go(-1);</script>");
+				response.getWriter().print("<script>alert('登录失败!" + e1.getMessage() + "');history.go(-1);</script>");
 			}
 			int count = list.size();
 			if(count==1){
 				
-				String dbPassword=(String)list.get(0).get("Password");
+				String dbPassword=(String)(list.get(0)).get("Password");
 				String decodePassword =Security.Decode(dbPassword);
 				if(password.equals(decodePassword)){
-					request.getRequestDispatcher("/view/index.jsp").forward(request, response);
+					Calendar calendar = Calendar.getInstance();
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String time = format.format(calendar.getTime());
+					String sql2="update Users set LoginIp='"+request.getRemoteAddr()+"',LoginTime='"+ time +"'where UserName='"+username+"'";
+					try {
+						SqlHelper.update(sql2);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						response.getWriter().print("<script>alert('登录时遇到错误!" + e.getMessage() + "');history.go(-1);</script>");
+						return;
+					}
+					request.getSession().setAttribute("userId", list.get(0).get("Id"));
+					request.getSession().setAttribute("displayName", list.get(0).get("DisplayName"));
+					response.sendRedirect("view/index.jsp");
+					//request.getRequestDispatcher("/view/index.jsp").forward(request, response);
 				}else{
 					response.getWriter().print("<script>alert('密码错误!');history.go(-1);</script>");
+					return;
 				}
 			}else if(count>1){
 				response.getWriter().print("<script>alert('存在多个相同用户，请联系管理员!');history.go(-1);</script>");

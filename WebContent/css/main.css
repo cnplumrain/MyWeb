@@ -1,7 +1,13 @@
 @CHARSET "UTF-8";
-.font{
-		font-family:楷体;
-		font-weight: bold;
-		text-shadow: 3px 3px 2px #000000;
-		color: #ffd700;
-	}
+body{
+	font-family:楷体;
+	font-size:18px;
+	font-weight: bold;
+	text-shadow: 3px 3px 2px #000000;
+	color: #ffd700;
+}
+	a{font-family:楷体;font-size:18px;color:#ffd700;text-shadow: 3px 3px 2px #000000;}
+	a:link{color:#ffd700}
+	a:visited{color:#ffd700}
+	a:hover{color:red}
+

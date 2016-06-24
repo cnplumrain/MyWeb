@@ -3,7 +3,7 @@
 <!DOCTYPE html>  
 <html>  
     <head>  
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <title>Insert title here</title>
         <style type="text/css">
         	input{height: 25px;width: 200px;margin-top: 10px;}
@@ -47,7 +47,7 @@
         <input type="password" name="Password" placeholder="密码" value=""><br>
         <input type="text" name="VerificationCode" placeholder="验证码">
         <img  id="verification"  src="verification" onclick="changeCode();" style="vertical-align: middle;"><br>
-        <button type="submit" style="margin-top: 10px;">确定</button>
+        <button type="submit" style="margin-top: 10px;">登录</button>
         </form>
     </body>  
 </html>  

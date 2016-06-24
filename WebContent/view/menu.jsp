@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet"type="text/css" href="../css/main.css"/>
 <style type="text/css">
 #menu
 {
@@ -12,9 +13,9 @@ width:200px;
 position:relative;
 }
 .trans{
-	-webkit-transition: height 1s ease-in-out 0s;
-	-o-transition: height 1s ease-in-out 0s;
-	transition: height 1s ease-in-out 0s;
+	-webkit-transition: height 0.5s ease-in-out 0s;
+	-o-transition: height 0.5s ease-in-out 0s;
+	transition: height 0.5s ease-in-out 0s;
 }
 
 </style>
@@ -33,10 +34,11 @@ position:relative;
 		});
 		$("#menu>ul>li").click(function(e){	//取第一层li
 			
-			$(this).children("ul").children("li").toggle();
+			$(this).children("ul").toggle();
 			//$(this).children("ul").children("li").attr("class","trans");
 			e.stopPropagation();    //  阻止事件冒泡
 		});
+		$("#menu ul li ul").css("display","none");//初始化二级菜单不可见
 		
 	});
 </script>
@@ -45,10 +47,11 @@ position:relative;
 	<nav id="menu">
 		<ul>
 			<li data-src="three/clock.html"><a href="javascript:void(0)">首页</a></li>
+			<li data-src="../activity"><a href="javascript:void(0)">活动</a></li>
+			<li data-src="../chat"><a href="javascript:void(0)">聊天</a></li>
 			<li data-src="three/clock.html"><a href="javascript:void(0)">文章</a>
 				<ul>
 					<li data-src="article/index.html"><a href="javascript:void(0)">开心一刻</a></li>
-					<li><a href="javascript:void(0)">二级</a></li>
 				</ul>
 			</li>
 			<li data-src="audio/audio.html"><a href="javascript:void(0)">音乐</a></li>

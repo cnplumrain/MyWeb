@@ -11,7 +11,8 @@
 		$(document).keypress(function(e){
 			if(e.ctrlKey && (e.which == 13 || e.which == 10)) {    
 				//要执行的操作
-				var msg = $("#msg").html();
+				var msg = $("#msg").val();
+				
 				$.ajax({
 			           type: "POST",
 			           url: "chat",
@@ -19,7 +20,9 @@
 			           data:{msg:msg},  //参数列表
 			           //dataType:"json",		//加了json则返回数据必须为json格式
 			           success: function(result){
-			           
+			           		if(result!="" && result!=null){
+			           			alert(result);
+			           		}
 			           },
 			           error: function(result){
 			              //请求失败之后的操作
@@ -28,7 +31,8 @@
 			    });	
 			}
 		});
-		//setInterval(getMsg,1000);
+		//getMsg();
+		setInterval(getMsg,1000);
 		function getMsg(){
 			$.ajax({
 		           type: "POST",
@@ -37,7 +41,7 @@
 		           data:null,  //参数列表
 		           //dataType:"json",		//加了json则返回数据必须为json格式
 		           success: function(result){
-  
+  						$("#history").html(result);
 		           },
 		           error: function(result){
 		              //请求失败之后的操作
